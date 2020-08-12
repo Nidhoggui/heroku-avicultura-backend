@@ -1,0 +1,48 @@
+const express = require('express');
+const crypto = require('crypto');
+const connection = require('./database/connection');
+
+const GranjaController = require('./controllers/GranjaController');
+const LoteController = require('./controllers/LoteController');
+const SessionController = require('./controllers/SessionController');
+const AlbúmenController = require('./controllers/AlbúmenController');
+const CascaController = require('./controllers/CascaController');
+const GemaController = require('./controllers/GemaController');
+const OvoController = require('./controllers/OvoController');
+const mailerController = require('./controllers/mailer');
+
+const routes = express.Router();
+
+routes.post('/login', SessionController.create);
+routes.get('/login/emailcheck', SessionController.emailcheck);
+routes.put('/login/updatepassword', SessionController.updatepassword);
+
+routes.post('/cadastro', GranjaController.create);
+routes.get('/listar-granjas',GranjaController.index);
+
+routes.post('/setor-lote', LoteController.create);
+routes.get('/perfil-lote', LoteController.index);
+routes.delete('/perfil-lote/:id', LoteController.delete);
+routes.put('perfil-lote/:id', LoteController.update);
+
+routes.post('/albumen', AlbúmenController.create);
+routes.delete('/revisar-ovo/albumen/:id', AlbúmenController.delete);
+routes.put('/revisar-ovo/albumen/:id', AlbúmenController.update);
+routes.get('/lista-albumen', AlbúmenController.index);
+routes.post('/casca', CascaController.create);
+routes.delete('/revisar-ovo/casca/:id', CascaController.delete);
+routes.put('/revisar-ovo/casca/:id', CascaController.update);
+routes.get('/lista-cascas', CascaController.index);
+routes.post('/gema',GemaController.create);
+routes.get('/lista-gemas', GemaController.index);
+routes.delete('/revisar-ovo/gema/:id', GemaController.delete);
+routes.put('/revisar-ovo/gema/:id', GemaController.update);
+
+routes.post('/ovo', OvoController.create);
+routes.get('/perfil-ovos' , OvoController.index);
+routes.delete('/perfil-ovos/:id', OvoController.delete);
+routes.put('/perfil-ovos/:id', OvoController.update);
+
+routes.post('/confirmar-granja', mailerController.mail);
+
+module.exports = routes;

@@ -1,0 +1,32 @@
+{
+  "name": "avicultura_ufape",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nidhoggui/avicultura_UFAPE.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nidhoggui/avicultura_UFAPE/issues"
+  },
+  "homepage": "https://github.com/Nidhoggui/avicultura_UFAPE#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "knex": "^0.21.4",
+    "nodemailer": "^6.4.11",
+    "nodemailer-smtp-transport": "^2.7.4",
+    "path": "^0.12.7",
+    "sqlite3": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
