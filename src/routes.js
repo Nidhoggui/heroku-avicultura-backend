@@ -10,6 +10,7 @@ const CascaController = require('./controllers/CascaController');
 const GemaController = require('./controllers/GemaController');
 const OvoController = require('./controllers/OvoController');
 const mailerController = require('./controllers/mailer');
+const GranjaClandestinaController = require('./controllers/GranjaClandestinaController')
 
 const routes = express.Router();
 
@@ -18,7 +19,9 @@ routes.get('/login/emailcheck', SessionController.emailcheck);
 routes.put('/login/updatepassword', SessionController.updatepassword);
 
 routes.post('/cadastro', GranjaController.create);
+routes.post('/cadastroC', GranjaClandestinaController.create);
 routes.get('/listar-granjas',GranjaController.index);
+routes.get('/listar-granjasC',GranjaClandestinaController.index);
 
 routes.post('/setor-lote', LoteController.create);
 routes.get('/perfil-lote', LoteController.index);
