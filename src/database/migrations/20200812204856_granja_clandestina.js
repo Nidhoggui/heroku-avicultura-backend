@@ -1,9 +1,9 @@
+
 exports.up = function(knex) {
-  return knex.schema.createTable('granjas', function(table){
+  return knex.schema.createTable('granjas_clandestinas', function(table){
     table.string('id').primary();
-    table.string('nomeFantasia').notNullable();
-    table.string('razaoSocial').notNullable();
-    table.string('cnpj').notNullable();
+    table.string('nome').notNullable();
+    table.string('cpf').notNullable();
     table.string('proprietario').notNullable();
     table.boolean('gaiola');
     table.string('localizacao');
@@ -14,5 +14,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTable('granjas');
+  return knex.schema.dropTable('granjas_clandestinas');
 };

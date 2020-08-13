@@ -44,5 +44,6 @@ routes.delete('/perfil-ovos/:id', OvoController.delete);
 routes.put('/perfil-ovos/:id', OvoController.update);
 
 routes.post('/confirmar-granja', mailerController.mail);
+routes.post('/redefinir-senha', mailerController.resetpassword);
 
 module.exports = routes;
