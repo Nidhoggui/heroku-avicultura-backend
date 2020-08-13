@@ -22,14 +22,15 @@ module.exports = {
          cnpj == '66666666666666' ||
          cnpj == '77777777777777' ||
          cnpj == '88888888888888' ||
-         return false
+         cnpj == '99999999999999'
          )
+         return false
 
-      const tamanho = cnpj.length - 2
-      const numeros = cnpj.substring(0,tamanho)
-      const digitos = cnpj.substring(tamanho)
-      const soma = 0;
-      const pos = tamanho - 7;
+      var tamanho = cnpj.length - 2
+      var numeros = cnpj.substring(0,tamanho)
+      var digitos = cnpj.substring(tamanho)
+      var soma = 0;
+      var pos = tamanho - 7;
 
       for (i = tamanho; i >= 1; i--) {
         soma += numeros.charAt(tamanho - i) * pos--;

@@ -9,8 +9,8 @@ module.exports = {
     const id = crypto.randomBytes(3).toString('HEX');
 
     function validarCPF(cpf){
-      const soma
-      const resto
+      var soma
+      var resto
       soma = 0
 
         if(cpf = '00000000000') return false

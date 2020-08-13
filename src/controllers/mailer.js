@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer')
 const smtpTransport = require('nodemailer-smtp-transport')
 const connection = require('../database/connection')
 
-module.exports{
+module.exports = {
 
 async mail(request, response){
   const transport = nodemailer.createTransport(smtpTransport({
