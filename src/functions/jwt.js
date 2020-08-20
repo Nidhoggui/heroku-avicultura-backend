@@ -1,7 +1,7 @@
 const crypto=require('crypto');
 var jwt = require('jsonwebtoken');
 
-const secret="uml1tr0d3l4gr1m4s";
+const secret=process.env.JWT_SECRET;
 
 module.exports={
     createJWTToken(payload){
