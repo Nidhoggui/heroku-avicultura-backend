@@ -10,18 +10,18 @@ module.exports = {
       service: 'Gmail',
       host: 'smtp.gmail.com',
       auth: {
-        user: 'sysaviculturaUFAPE@gmail.com',
-        pass: '11real_password_for_above_account',
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD,
       }
     }));
     const send = {
-      from: 'sysaviculturaUFAPE@gmail.com',
+      from: process.env.EMAIL_USER,
       to: email,
       subject: 'Confirmação de Usuário',
       html: pug.renderFile(__dirname+"\\files\\"+'confirm.pug',{
         Header: 'Olá,seja bem vindo a Avicultura!',
         Content: 'Se você está aqui,você está a um passo do sistema.<br/>Clique no botão abaixo para confirmar seu email',
-        Url:`http://localhost:3000/register/confirm/${id}`
+        Url:`${process.env.APP_FRONTEND_URL}/register/confirm/${id}`
         })
     }
     transport.sendMail(send, (error) => {
@@ -47,18 +47,18 @@ module.exports = {
        service: 'Gmail',
        host: 'smtp.gmail.com',
        auth: {
-         user: 'sysaviculturaUFAPE@gmail.com',
-         pass: '11real_password_for_above_account'
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD,
        }
      }));
      const mailOptions = {
-       from: 'sysaviculturaUFAPE@gmail.com',
+       from: process.env.EMAIL_USER,
        to: email,
        subject: 'Redefinir Senha',
        html: pug.renderFile(__dirname+"\\files\\"+'confirm.pug',{
         Header: `Olá ${granja.nome}, a quanto tempo!`,
         Content: 'Você está recebendo esse email pois recebemos um pedido seu para mudar a senha de sua conta. Caso você ache que isso seja um engano, ignore este email. Caso não, clique no botão abaixo para prosseguirmos:',
-        Url: `http://localhost:3000/forgotpassword/change/${granja.id}`
+        Url: `${process.env.APP_FRONTEND_URL}/forgotpassword/change/${granja.id}`
       })
      }
      transporter.sendMail(mailOptions, (error) => {
