@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "nodemon src/index.js"
   },
   "repository": {
     "type": "git",
@@ -17,13 +17,16 @@
   },
   "homepage": "https://github.com/Nidhoggui/avicultura_UFAPE#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.4",
     "nodemailer": "^6.4.11",
     "nodemailer-smtp-transport": "^2.7.4",
     "path": "^0.12.7",
+    "pug": "^3.0.0",
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {
