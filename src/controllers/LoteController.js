@@ -1,9 +1,10 @@
 const connection = require('../database/connection');
+const jwt =require('../functions/jwt');
 
 module.exports = {
   async create(request, response) {
     const { linhagem, idade, nutrição, numero_de_aves, galpao } = request.body;
-    const granja_id = request.headers.authorization;
+    const jwtToken = jwt.decodeJWTToken(request.headers.authorization);
 
     const [id] = await connection('lotes').insert({
       linhagem,
@@ -11,7 +12,7 @@ module.exports = {
       nutrição,
       numero_de_aves,
       galpao,
-      granja_id,
+      granja_id:jwtToken.id,
     });
 
     return response.json({

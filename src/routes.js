@@ -2,15 +2,15 @@ const express = require('express');
 const crypto = require('crypto');
 const connection = require('./database/connection');
 
-const GranjaController = require('./controllers/GranjaController');
+const GranjaJuridicaController = require('./controllers/GranjaJuridicaController');
 const LoteController = require('./controllers/LoteController');
 const SessionController = require('./controllers/SessionController');
 const AlbúmenController = require('./controllers/AlbúmenController');
 const CascaController = require('./controllers/CascaController');
 const GemaController = require('./controllers/GemaController');
 const OvoController = require('./controllers/OvoController');
-const mailerController = require('./controllers/mailer');
-const GranjaClandestinaController = require('./controllers/GranjaClandestinaController')
+const mailerController = require('./controllers/mailerController');
+const GranjaFisicaController = require('./controllers/GranjaFisicaController')
 
 const routes = express.Router();
 
@@ -18,10 +18,12 @@ routes.post('/login', SessionController.create);
 routes.get('/login/emailcheck', SessionController.emailcheck);
 routes.put('/login/updatepassword', SessionController.updatepassword);
 
-routes.post('/cadastro', GranjaController.create);
-routes.post('/cadastroC', GranjaClandestinaController.create);
-routes.get('/listar-granjas',GranjaController.index);
-routes.get('/listar-granjasC',GranjaClandestinaController.index);
+routes.post('/cadastro-juridico', GranjaJuridicaController.create);
+routes.post('/cadastro-fisico', GranjaFisicaController.create);
+routes.get('/listar-granjas-juridicas',GranjaJuridicaController.index);
+routes.get('/listar-granjas-fisicas',GranjaFisicaController.index);
+routes.post('/confirmar-juridico', GranjaJuridicaController.confirmAccount);
+routes.post('/confirmar-fisico', GranjaFisicaController.confirmAccount);
 
 routes.post('/setor-lote', LoteController.create);
 routes.get('/perfil-lote', LoteController.index);
@@ -46,7 +48,6 @@ routes.get('/perfil-ovos' , OvoController.index);
 routes.delete('/perfil-ovos/:id', OvoController.delete);
 routes.put('/perfil-ovos/:id', OvoController.update);
 
-routes.post('/confirmar-granja', mailerController.mail);
 routes.post('/redefinir-senha', mailerController.resetpassword);
 
 module.exports = routes;
