@@ -6,7 +6,6 @@ module.exports = {
   async create(request, response) {
     const email=crypto.createHash('md5').update(request.body.email).digest('hex');
     const password=crypto.createHash('md5').update(request.body.password).digest('hex');
-
     var granja = await connection('granjas').where('password', password).where('email', email).select('nomefantasia', 'id','confirmationFlag').first();
 
     if(granja===undefined){
