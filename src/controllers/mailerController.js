@@ -18,7 +18,7 @@ module.exports = {
       from: process.env.EMAIL_USER,
       to: email,
       subject: 'Confirmação de Usuário',
-      html: pug.renderFile(__dirname+"\\files\\"+'confirm.pug',{
+      html: pug.renderFile(__dirname+"/files/"+'confirm.pug',{
         Header: 'Olá,seja bem vindo a Avicultura!',
         Content: 'Se você está aqui,você está a um passo do sistema.<br/>Clique no botão abaixo para confirmar seu email',
         Url:`${process.env.APP_FRONTEND_URL}/register/confirm/${id}`
@@ -55,7 +55,7 @@ module.exports = {
        from: process.env.EMAIL_USER,
        to: email,
        subject: 'Redefinir Senha',
-       html: pug.renderFile(__dirname+"\\files\\"+'confirm.pug',{
+       html: pug.renderFile(__dirname+"/files/"+'confirm.pug',{
         Header: `Olá ${granja.nome}, a quanto tempo!`,
         Content: 'Você está recebendo esse email pois recebemos um pedido seu para mudar a senha de sua conta. Caso você ache que isso seja um engano, ignore este email. Caso não, clique no botão abaixo para prosseguirmos:',
         Url: `${process.env.APP_FRONTEND_URL}/forgotpassword/change/${granja.id}`
