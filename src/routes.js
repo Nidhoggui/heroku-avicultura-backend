@@ -47,6 +47,7 @@ routes.post('/ovo', OvoController.create);
 routes.get('/perfil-ovos' , OvoController.index);
 routes.delete('/perfil-ovos/:id', OvoController.delete);
 routes.put('/perfil-ovos/:id', OvoController.update);
+routes.get('/lista-ovos', OvoController.listOvos);
 
 routes.post('/redefinir-senha', mailerController.resetpassword);
 
