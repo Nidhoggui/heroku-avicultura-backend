@@ -1,9 +1,10 @@
 const connection = require('../database/connection');
+const jwt =require('../functions/jwt');
 
 module.exports = {
   async create(request, response) {
     const { pesoOvo, id_gema, id_albumen, id_casca, lote, secaoOvo } = request.body;
-    const granja_id = request.headers.authorization;
+    const jwtToken = jwt.decodeJWTToken(request.headers.authorization);
 
     const [id] = await connection('ovos').insert({
       pesoOvo,
@@ -11,8 +12,8 @@ module.exports = {
       id_albumen,
       id_casca,
       lote,
-      granja_id,
-      secaoOvo
+      secaoOvo,
+      granja_id:jwtToken.id,
     });
     return response.json({
       id
@@ -24,6 +25,10 @@ module.exports = {
       const secaoOvo = request.body;
       const ovos = await connection('ovos').join('granjas','granjas.id','=','lotes.granja_id').where('secaoOvo', secaoOvo).select('*');
 
+      return response.json(ovos);
+    },
+    async listOvos(request,response){
+      const ovos = await connection('ovos').select('*');
       return response.json(ovos);
     },
     async delete(request, response){
