@@ -43,30 +43,35 @@ module.exports = {
       granja=await connection('granjas').where('email',cryptedEmail).select({nome:'nomeFantasia'},'id').first();
     }
 
-    const transporter = nodemailer.createTransport(smtpTransport({
-       service: 'Gmail',
-       host: 'smtp.gmail.com',
-       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD,
-       }
-     }));
-     const mailOptions = {
-       from: process.env.EMAIL_USER,
-       to: email,
-       subject: 'Redefinir Senha',
-       html: pug.renderFile(__dirname+"/files/"+'confirm.pug',{
-        Header: `Olá ${granja.nome}, a quanto tempo!`,
-        Content: 'Você está recebendo esse email pois recebemos um pedido seu para mudar a senha de sua conta. Caso você ache que isso seja um engano, ignore este email. Caso não, clique no botão abaixo para prosseguirmos:',
-        Url: `${process.env.APP_FRONTEND_URL}forgotpassword/change/${granja.id}`
-      })
-     }
-     transporter.sendMail(mailOptions, (error) => {
-       if(error) {
-         return console.log(error)
-       }else{
-       console.log('Enviado com sucesso!')
-     }
-     });
+    try{
+      const transporter = nodemailer.createTransport(smtpTransport({
+        service: 'Gmail',
+        host: 'smtp.gmail.com',
+        auth: {
+         user: process.env.EMAIL_USER,
+         pass: process.env.EMAIL_PASSWORD,
+        }
+      }));
+      const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: email,
+        subject: 'Redefinir Senha',
+        html: pug.renderFile(__dirname+"/files/"+'confirm.pug',{
+         Header: `Olá ${granja.nome}, a quanto tempo!`,
+         Content: 'Você está recebendo esse email pois recebemos um pedido seu para mudar a senha de sua conta. Caso você ache que isso seja um engano, ignore este email. Caso não, clique no botão abaixo para prosseguirmos:',
+         Url: `${process.env.APP_FRONTEND_URL}forgotpassword/change/${granja.id}`
+       })
+      }
+      transporter.sendMail(mailOptions, (error) => {
+        if(error) {
+          return console.log(error)
+        }else{
+        console.log('Enviado com sucesso!')
+        return response.status(200).send();
+      }
+      });
+    }catch(error){
+      return response.status(404).send();
+    }
    }
 }
