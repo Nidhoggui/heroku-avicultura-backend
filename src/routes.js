@@ -15,7 +15,6 @@ const GranjaFisicaController = require('./controllers/GranjaFisicaController')
 const routes = express.Router();
 
 routes.post('/login', SessionController.create);
-routes.get('/login/emailcheck', SessionController.emailcheck);
 routes.put('/login/updatepassword', SessionController.updatepassword);
 
 routes.post('/cadastro-juridico', GranjaJuridicaController.create);
