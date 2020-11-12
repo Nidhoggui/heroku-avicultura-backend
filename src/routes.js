@@ -10,7 +10,8 @@ const CascaController = require('./controllers/CascaController');
 const GemaController = require('./controllers/GemaController');
 const OvoController = require('./controllers/OvoController');
 const mailerController = require('./controllers/mailerController');
-const GranjaFisicaController = require('./controllers/GranjaFisicaController')
+const GranjaFisicaController = require('./controllers/GranjaFisicaController');
+const EggSessionController = require('./controllers/EggSessionController');
 
 const routes = express.Router();
 
@@ -47,6 +48,12 @@ routes.get('/perfil-ovos' , OvoController.index);
 routes.delete('/perfil-ovos/:id', OvoController.delete);
 routes.put('/perfil-ovos/:id', OvoController.update);
 routes.get('/lista-ovos', OvoController.listOvos);
+
+routes.post('/egg-session', EggSessionController.create);
+routes.get('/egg-session', EggSessionController.index);
+routes.get('/egg-session/get-eggs', EggSessionController.listEggsBySession);
+routes.get('/egg-session/get-session/:sessionId', EggSessionController.getSessionData);
+    
 
 routes.post('/redefinir-senha', mailerController.resetpassword);
 

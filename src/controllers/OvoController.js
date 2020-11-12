@@ -3,21 +3,18 @@ const jwt =require('../functions/jwt');
 
 module.exports = {
   async create(request, response) {
-    const { pesoOvo, id_gema, id_albumen, id_casca, lote, secaoOvo } = request.body;
+    const { id, lote, secao_id, alturaAlbumen, diametroAlbumen} = request.body;
     const jwtToken = jwt.decodeJWTToken(request.headers.authorization);
 
-    const [id] = await connection('ovos').insert({
-      pesoOvo,
-      id_gema,
-      id_albumen,
-      id_casca,
+    await connection('ovos').insert({
+      id,
       lote,
-      secaoOvo,
+      secao_id,
+      alturaAlbumen,
+      diametroAlbumen,
       granja_id:jwtToken.id,
     });
-    return response.json({
-      id
-    });
+    return response.status(200).send();
     },
     async index(request, response) {
       const { page = 1} = request.query;
@@ -47,14 +44,23 @@ module.exports = {
       return response.status(204).send();
     },
     async update(request, response, next){
-      try{
-        const { id } = request.params;
-        const { peso } = request.body;
+      const {id}=request.params;
+      const data=request.body;
+      const sessionId=request.headers.authorization;
 
-        await connection('ovos').update({ peso }).where('id', id);
-        return response.send();
-      }catch(error){
-        next(error);
-      }
+      await connection('ovos').update(data).where('id',id).andWhere('secao_id',sessionId);
+
+      response.status(200).send();
+
+
+      // try{
+      //   const { id } = request.params;
+      //   const { peso } = request.body;
+
+      //   await connection('ovos').update({ peso }).where('id', id);
+      //   return response.send();
+      // }catch(error){
+      //   next(error);
+      // }
     },
 }
