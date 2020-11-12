@@ -15,7 +15,7 @@ module.exports = {
       }
     }));
     const send = {
-      from: process.env.EMAIL_USER,
+      from: 'sysaviculturaUFAPE@gmail.com',
       to: email,
       subject: 'Confirmação de Usuário',
       html: pug.renderFile(__dirname+"/files/"+'confirm.pug',{
