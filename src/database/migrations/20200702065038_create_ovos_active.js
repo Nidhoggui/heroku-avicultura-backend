@@ -1,7 +1,7 @@
 
 exports.up = function(knex) {
   return knex.schema.createTable('ovos', function(table){
-    table.integer('id').primary();
+    table.integer('id')
     table.string('lote').notNullable();
     table.decimal('pesoOvo')
 
@@ -19,11 +19,13 @@ exports.up = function(knex) {
     table.integer('diametroGema')
     table.integer('corGema')
 
-    table.string('secao_id').primary();
+    table.string('secao_id')
     table.foreign('secao_id').references('id').inTable('secao_ovo');
 
     table.string('granja_id').notNullable();
     table.foreign('granja_id').references('id').inTable('granjas');
+
+    table.primary(['id','secao_id'])
   });
 };
 
