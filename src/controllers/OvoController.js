@@ -2,19 +2,22 @@ const connection = require('../database/connection');
 const jwt =require('../functions/jwt');
 
 module.exports = {
-  async create(request, response) {
-    const { id, lote, secao_id, alturaAlbumen, diametroAlbumen} = request.body;
-    const jwtToken = jwt.decodeJWTToken(request.headers.authorization);
+    async create(request, response) {
+      const { id, lote, secao_id, pesoOvo, alturaAlbumen, diametroAlbumen, albumenEmpty} = request.body;
+      const jwtToken = jwt.decodeJWTToken(request.headers.authorization);
 
-    await connection('ovos').insert({
-      id,
-      lote,
-      secao_id,
-      alturaAlbumen,
-      diametroAlbumen,
-      granja_id:jwtToken.id,
-    });
-    return response.status(200).send();
+      await connection('ovos').insert({
+        id,
+        lote,
+        pesoOvo,
+        secao_id,
+        albumenEmpty,
+        alturaAlbumen,
+        diametroAlbumen,
+        granja_id:jwtToken.id,
+      });
+
+      return response.status(200).send();
     },
     async index(request, response) {
       const { page = 1} = request.query;
@@ -62,5 +65,16 @@ module.exports = {
       // }catch(error){
       //   next(error);
       // }
+    },
+    async getEgg(request, response){
+      const {id,session}=request.query;
+
+      try{
+        const ovo=await connection('ovos').select('*').where('id',id).andWhere('secao_id',session).first();
+        
+        return response.status(200).json(ovo);
+      }catch(error){
+        return response.status(400).json({'error':error});
+      }
     },
 }
