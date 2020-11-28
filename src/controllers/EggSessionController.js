@@ -41,7 +41,7 @@ module.exports = {
 
     const jwtToken = jwt.decodeJWTToken(request.headers.authorization);
 
-    const eggs=await connection('ovos').count('id').first();
+    const eggs=await connection('ovos').count('id').where('secao_id',sessionid).first();
     const eggData=await connection('ovos').select('*').where('secao_id',sessionid).andWhere("granja_id",jwtToken.id).limit(5).offset(5*(page-1));
     
     const pages=eggs['count(`id`)']/5;

@@ -44,6 +44,7 @@ routes.delete('/revisar-ovo/gema/:id', GemaController.delete);
 routes.put('/revisar-ovo/gema/:id', GemaController.update);
 
 routes.post('/ovo', OvoController.create);
+routes.get('/ovo', OvoController.getEgg);
 routes.get('/perfil-ovos' , OvoController.index);
 routes.delete('/perfil-ovos/:id', OvoController.delete);
 routes.put('/perfil-ovos/:id', OvoController.update);

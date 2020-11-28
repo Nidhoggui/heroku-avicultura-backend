@@ -5,15 +5,18 @@ exports.up = function(knex) {
     table.string('lote').notNullable();
     table.decimal('pesoOvo')
 
+    table.boolean('cascaEmpty');
     table.decimal('pesoCasca')
     table.integer('corCasca')
     table.integer('espessuraP1')
     table.integer('espessuraP2')
     table.integer('espessuraP3')
     
+    table.boolean('albumenEmpty');
     table.integer('alturaAlbumen')
     table.integer('diametroAlbumen')
 
+    table.boolean('gemaEmpty');
     table.decimal('pesoGema')
     table.integer('alturaGema')
     table.integer('diametroGema')
