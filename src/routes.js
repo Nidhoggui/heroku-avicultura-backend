@@ -27,8 +27,10 @@ routes.post('/confirmar-fisico', GranjaFisicaController.confirmAccount);
 
 routes.post('/setor-lote', LoteController.create);
 routes.get('/perfil-lote', LoteController.index);
+routes.get('/perfil-lote/list-lotes', LoteController.listLotes);
+routes.get('/perfil-lote/get-lote', LoteController.getLote);
 routes.delete('/perfil-lote/:id', LoteController.delete);
-routes.put('perfil-lote/:id', LoteController.update);
+routes.put('/perfil-lote/:id', LoteController.update);
 
 routes.post('/albumen', AlbúmenController.create);
 routes.delete('/revisar-ovo/albumen/:id', AlbúmenController.delete);
