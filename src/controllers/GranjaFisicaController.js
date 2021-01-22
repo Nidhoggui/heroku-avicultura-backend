@@ -22,7 +22,7 @@ module.exports = {
           termosDeUso,
           email:cryptedEmail,
           password,
-          confirmationFlag:false
+          confirmationFlag:true
         });
         mailerController.sendConfirmationEmail(email,id);
     }catch(error){
