@@ -1,7 +1,7 @@
 
-exports.up = function(knex) {
-  return knex.schema.createTable('lotes', function(table){
-    table.increments('lote_id');
+exports.up = function (knex) {
+  return knex.schema.createTable('lotes', function (table) {
+    table.integer('lote_id').primary();
     table.string('linhagem').notNullable();
     table.integer('idade').notNullable();
     table.string('nutrição');
@@ -14,6 +14,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable('lotes');
 };
