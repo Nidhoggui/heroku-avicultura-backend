@@ -1,5 +1,5 @@
-exports.up = function(knex) {
-  return knex.schema.createTable('granjas_fisicas', function(table){
+exports.up = function (knex) {
+  return knex.schema.createTable('granjas_fisicas', function (table) {
     table.string('id').primary();
     table.string('nome').notNullable();
     table.string('cpf').notNullable();
@@ -9,10 +9,9 @@ exports.up = function(knex) {
     table.boolean('gaiola').notNullable();
     table.string('localizacao').notNullable();
     table.boolean('termosDeUso');
-    table.boolean('confirmationFlag');
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable('granjas_fisicas');
 };
