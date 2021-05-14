@@ -4,8 +4,8 @@ const jwt = require('../functions/jwt');
 
 module.exports = {
   async index(request, response) {
-    const gemas = await connection('secao_ovo').select('*');
-    response.json(gemas);
+    const sessions = await connection('secao_ovo').select('*');
+    response.json(sessions);
   },
   async create(request, response) {
     const { egg_qt, lote, insection_way } = request.body;
@@ -25,6 +25,18 @@ module.exports = {
     return response.json({
       id
     });
+  },
+  async getGranjaSessions(request, response) {
+    const { page = 1 } = request.query;
+    const { id } = jwt.decodeJWTToken(request.headers.authorization);
+
+    const sessionData = await connection('secao_ovo').select('*').where('granja_id', id).limit(5)
+      .offset((page - 1) * 5).select('*');
+    const countSessions = await connection('secao_ovo').count('id').where('granja_id', id).first();
+
+    const pages = countSessions['count(`id`)'] / 5;
+
+    return response.json({ sessionData, pages });
   },
   async getSessionData(request, response) {
     const { sessionId } = request.params;
