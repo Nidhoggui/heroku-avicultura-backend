@@ -45,9 +45,12 @@ module.exports = {
                 const year = date.getFullYear();
                 const month = date.getMonth() <= 8 ? '0' + (date.getMonth() + 1).toString() : date.getMonth() + 1
                 const day = date.getDate() <= 9 ? '0' + date.getDate().toString() : date.getDate();
+                const hours = date.getHours();
+                const minutes = date.getMinutes();
+                const seconds = date.getSeconds();
                 const dateFormated = `${year}-${month}-${day}`;
-                const dateChart = `${day}-${month}-${year}`;
-                const secoes = await connection.raw(`select id from secao_ovo where strftime('%Y-%m-%d',created_at) = strftime('%Y-%m-%d','${dateFormated}')`);
+                const dateChart = new Date(`${dateFormated} ${hours}:${minutes}:${seconds}`).toLocaleDateString();
+                const secoes = await connection.raw(`select * from secao_ovo where strftime('%Y-%m-%d',created_at) = strftime('%Y-%m-%d','${dateFormated}')`);
 
                 if (secoes.length !== 0) {
                     const promise = await Promise.all(
