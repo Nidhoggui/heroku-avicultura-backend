@@ -1,4 +1,4 @@
-let rawCreateSection = "CREATE TABLE secao_ovo(id VARCHAR PRIMARY KEY,created_at TIMESTAMP DEFAULT (datetime('now','localtime')),egg_qt INTEGER,lote VARCHAR NOT NULL,insection_way NOT NULL, granja_id VARCHAR NOT NULL,FOREIGN KEY(granja_id) REFERENCES granjas(id))"
+let rawCreateSection = "CREATE TABLE secao_ovo(id VARCHAR PRIMARY KEY,created_at TIMESTAMP DEFAULT (datetime('now','-3 hours')),egg_qt INTEGER,lote VARCHAR NOT NULL,insection_way NOT NULL, granja_id VARCHAR NOT NULL,FOREIGN KEY(granja_id) REFERENCES granjas(id))"
 
 exports.up = function (knex) {
     return knex.schema.raw(rawCreateSection);
